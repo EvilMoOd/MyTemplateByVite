@@ -1,55 +1,132 @@
 <script setup lang="ts">
   import { formDate } from '@/utils/time';
-  import { ref, Ref } from 'vue';
+  import { ref, Ref, onMounted, onBeforeUnmount } from 'vue';
   import AppIcon from '@/components/AppIcon.vue';
   import { useRouter } from 'vue-router';
   let time: Ref<string> = ref(formDate(new Date().toISOString()));
+  let timer: any;
   const router = useRouter();
   function goLogin() {
     router.push({ name: 'Login' });
   }
+  function updateTime() {
+    time.value = formDate(new Date().toISOString());
+  }
+  onMounted(() => {
+    timer = setInterval(updateTime, 1000);
+  });
+  onBeforeUnmount(() => {
+    clearInterval(timer);
+  });
 </script>
 
 <template>
   <div class="layout">
-    <img src="@/assets/images/head.jpg" alt="" />
+    <img src="@/assets/images/he.png" alt="" />
     <a href="https://github.com/evilsfdd/MyTemplateByVite">
       <app-icon icon="mdi:github" class="text-5xl cursor-pointer"></app-icon>
     </a>
     <span class="text-green-100">给个star呗</span>
-    <h2>
-      {{ time }}
-      <br />
-    </h2>
-    <div>环境：vite2+eslint+prettier</div>
-    <div>语言:Vue3.2+Typescript+scss+h5</div>
-    <div>生态：vue-router路由+pinia仓库</div>
-    <div>TailWind CSS框架+ElementsUI-plus组件库+Iconfy图标库</div>
-    <div>工具类（待增加）：dayjs+lodash</div>
+    <div class="clock">
+      <p class="time">{{ time }}</p>
+    </div>
+    <div class="box">
+      <h3>语言:Vue3.2+Typescript+scss+h5</h3>
+      <h3>环境：vite2+eslint+prettier</h3>
+      <h3>生态：vue-router路由+pinia仓库</h3>
+      <h3>TailWind CSS框架+ElementsUI-plus组件库+Iconfy图标库</h3>
+      <h3>工具类（待增加）：dayjs+lodash</h3>
+    </div>
     <button @click="goLogin">登录页</button>
   </div>
 </template>
 
 <style lang="scss" scoped>
   .layout {
+    background: #0f3854;
+    background: radial-gradient(ellipse at center, #0a2e38 0%, #000000 70%);
+    background-size: 100%;
+    // background: radial-gradient(ellipse at center, #0a2e38 0%, #000000 70%);
+    background-size: 100%;
     text-align: center;
     display: flex;
     flex-direction: column;
     align-items: center;
+    height: 100vh;
+    color: #fff;
+    .clock {
+      // background-color: #111;
+      font-family: 'Share Tech Mono', monospace;
+      text-align: center;
+      color: #daf6ff;
+      text-shadow: 0 0 20px rgba(10, 175, 230, 1), 0 0 20px rgba(10, 175, 230, 0);
+      border-radius: 40px;
+      padding: 20px;
+      .time {
+        letter-spacing: 0.05em;
+        font-size: 40px;
+        padding: 5px 0;
+      }
+    }
   }
   img {
-    width: 30%;
+    border-radius: 20%;
+    width: 20%;
   }
   h2 {
-    font-size: 60px;
+    font-size: 40px;
   }
+
+  h3 {
+    position: relative;
+    font-size: 1.5rem;
+    &::before {
+      transform: scaleX(0);
+      transform-origin: bottom right;
+      content: ' ';
+      display: block;
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      inset: 0 0 0 0;
+      background: rgba(10, 175, 230, 0.5);
+      z-index: -1;
+      transition: transform 0.3s ease;
+    }
+    &:hover::before {
+      transform: scaleX(1);
+      transform-origin: bottom left;
+    }
+  }
+
+  body {
+    min-block-size: 100%;
+    min-inline-size: 100%;
+    margin: 0;
+    box-sizing: border-box;
+    display: grid;
+    place-content: center;
+    font-family: system-ui, sans-serif;
+  }
+
+  @media (orientation: landscape) {
+    body {
+      grid-auto-flow: column;
+    }
+  }
+
   div {
     font-size: 20px;
   }
   button {
     width: 100px;
     height: 40px;
-    background-color: #a2d2;
+    background-color: rgba(85, 50, 50, 0.133);
     border-radius: 30px;
+    &:hover{
+      background-color:rgba(236, 231, 231, 0.603);
+    }
   }
 </style>

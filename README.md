@@ -1,4 +1,4 @@
-Vue3+TS+vite2+vue-router+pinia+Elp+tailwind+iconfy+axios+lodash
+Vue3+TS+vite2+vue-router+pinia+Elp+tailwind+iconfy+axios+lodash+dayjs+eslint+prettier
 
 ###1、创建vite2项目，配置eslint和prettier；
 
