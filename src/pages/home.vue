@@ -22,6 +22,7 @@
 
 <template>
   <div class="layout">
+    <h1>木的vue脚手架</h1>
     <img src="@/assets/images/he.png" alt="" />
     <a href="https://github.com/evilsfdd/MyTemplateByVite">
       <app-icon icon="mdi:github" class="text-5xl cursor-pointer"></app-icon>
@@ -125,8 +126,45 @@
     height: 40px;
     background-color: rgba(85, 50, 50, 0.133);
     border-radius: 30px;
-    &:hover{
-      background-color:rgba(236, 231, 231, 0.603);
+    &:hover {
+      background-color: rgba(236, 231, 231, 0.603);
+    }
+  }
+  h1 {
+    font-size: 4rem;
+    font-weight: bold;
+    white-space: nowrap;
+    overflow: hidden;
+    letter-spacing: 5px;
+    color: #fff;
+    position: relative;
+    animation: typing 3s steps(5) forwards infinite alternate-reverse;
+    &::after {
+      content: '';
+      display: block;
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 2px;
+      height: 100%;
+      background-color: #fff;
+      animation: blink 1s linear infinite;
+    }
+  }
+  @keyframes blink {
+    0% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+  @keyframes typing {
+    0% {
+      width: 0;
+    }
+    100% {
+      width: 680px;
     }
   }
 </style>
