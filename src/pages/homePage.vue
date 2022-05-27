@@ -1,16 +1,16 @@
 <script setup lang="ts">
   import { formDate } from '@/utils/time';
-  import { ref, Ref, onMounted, onBeforeUnmount } from 'vue';
+  import { ref, onMounted, onBeforeUnmount } from 'vue';
   import AppIcon from '@/components/AppIcon.vue';
   import { useRouter } from 'vue-router';
-  let time: Ref<string> = ref(formDate(new Date().toISOString()));
+  const time = ref(formDate(Date.now()));
   let timer: any;
   const router = useRouter();
   function goLogin() {
     router.push({ name: 'Login' });
   }
   function updateTime() {
-    time.value = formDate(new Date().toISOString());
+    time.value = formDate(Date.now());
   }
   onMounted(() => {
     timer = setInterval(updateTime, 1000);
@@ -32,11 +32,11 @@
       <p class="time">{{ time }}</p>
     </div>
     <div class="box">
-      <h3>语言:Vue3.2+Typescript+scss+h5</h3>
-      <h3>环境：vite2+eslint+prettier</h3>
-      <h3>生态：vue-router路由+pinia仓库</h3>
-      <h3>TailWind CSS框架+ElementsUI-plus组件库+Iconfy图标库</h3>
-      <h3>工具类（待增加）：dayjs+lodash</h3>
+      <h3>语言:Typescript+scss+h5</h3>
+      <h3>框架：vue3.2(vue-router路由+pinia仓库)+TailWind CSS</h3>
+      <h3>库：dayjs+lodash+ElementsUI-plus组件库+Iconfy图标库+dayjs日期库+lodash函数库</h3>
+      <h3>工具：vite2+eslint+prettier+自动导入</h3>
+      <h3></h3>
     </div>
     <button @click="goLogin">登录页</button>
   </div>

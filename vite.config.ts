@@ -1,11 +1,8 @@
 import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
-//配置路径
 import * as path from 'path';
-//按需引入El
 import Components from 'unplugin-vue-components/vite';
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers';
-//按需引入icon
 import PurgeIcons from 'vite-plugin-purge-icons';
 
 const resolve = (p: string) => {
@@ -24,6 +21,9 @@ export default defineConfig({
     //按需加载EL和Icon
     Components({
       resolvers: [ElementPlusResolver()],
+      dirs: ['src/components'],
+      extensions: ['vue'],
+      dts: 'src/components.d.ts',
     }),
     PurgeIcons({
       /* PurgeIcons Options */

@@ -4,7 +4,7 @@
   import { OK_CODE } from '@/app/keys';
   import { ElMessage } from 'element-plus';
   import { useRouter } from 'vue-router';
-  import useUserStore from '@/store/modules/userStore';
+  import useUserStore from '@/store/userStore';
 
   const router = useRouter();
   const userStore = useUserStore();
@@ -22,7 +22,7 @@
     formEl.value!.validate().then(async (ok: boolean) => {
       if (!ok) return;
       try {
-        let { code, data, msg } = await reqUserLogin(userInfo);
+        const { code, data, msg } = await reqUserLogin(userInfo);
         if (code === OK_CODE) {
           ElMessage.success(msg);
           userStore.login(Object.assign({}, data.info, { token: data.token }));
@@ -41,12 +41,12 @@
   <div class="layout">
     <div class="login-container">
       <el-form
+        ref="formEl"
         size="small"
         :model="userInfo"
         :rules="rules"
-        @submit="handleSubmit"
-        ref="formEl"
         class="form-login"
+        @submit="handleSubmit"
       >
         <ul class="login-nav">
           <li class="login-nav__item active">
@@ -57,18 +57,18 @@
         <el-form-item prop="username">
           <el-input
             id="login-input-user"
+            v-model:model-value="userInfo.username"
             class="login__input"
             placeholder="用户名"
-            v-model:model-value="userInfo.username"
           />
         </el-form-item>
         <label for="login-input-password" class="login__label">Password</label>
 
         <el-form-item prop="password">
           <el-input
+            v-model:model-value="userInfo.password"
             placeholder="密码"
             type="password"
-            v-model:model-value="userInfo.password"
             class="login__input"
           />
         </el-form-item>

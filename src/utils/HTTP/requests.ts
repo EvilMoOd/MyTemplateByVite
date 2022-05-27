@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { KEY_USER_ID, UserInfo } from '@/store/modules/userStore';
+import { KEY_USER_ID, UserInfo } from '@/store/userStore';
 import { NO_PERMISSION, OK_CODE } from '@/app/keys';
 import router from '@/route';
 import nprogress from '@/utils/nprogress';
